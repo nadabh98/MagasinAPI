@@ -6,7 +6,7 @@ from . import models, schemas
 
 
 # Création des tables si elles n'existent pas
-#Base.metadata.create_all(bind=engine)
+Base.metadata.create_all(bind=engine)
 
 
 # Création de l'application FastAPI

@@ -11,7 +11,8 @@ DATABASE_URL = os.getenv("DATABASE_URL")
 
 # Créer la connexion avec MariaDB/MySQL
 engine = create_engine(
-    DATABASE_URL
+    DATABASE_URL,
+    pool_pre_ping=True
 )
 
 # Créer les sessions de connexion

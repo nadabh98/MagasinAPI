@@ -30,3 +30,15 @@ class Commande(CommandeCreate):
 
     class Config:
         from_attributes = True
+
+# Schema pour modifier un client
+class ClientUpdate(BaseModel):
+    nom: str | None = None
+    ville: str | None = None
+
+
+# Schema pour modifier une commande
+class CommandeUpdate(BaseModel):
+    id_client: int | None = None
+    produit: str | None = None
+    montant: Decimal | None = None

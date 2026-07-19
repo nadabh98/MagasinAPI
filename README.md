@@ -1,67 +1,67 @@
-# 🛒 MagasinAPI - FastAPI REST API
+# 🏪 MagasinAPI
 
-## 📌 Description
+API de gestion d'un magasin développée avec **FastAPI**, connectée à une base de données **MySQL (FreeDB)** et déployée sur **Render**.
 
-MagasinAPI est une API REST développée avec **FastAPI** permettant de gérer les clients et les commandes d'un magasin.
-
-Le projet met en œuvre une architecture backend moderne avec :
-- FastAPI pour la création des services web
-- SQLAlchemy pour l'accès aux données
-- MySQL/MariaDB pour la base de données
-- Pydantic pour la validation des données
-- Déploiement prévu sur Render avec une base MySQL distante
+Le projet contient également une application cliente graphique développée avec **Tkinter** permettant d'interagir avec l'API.
 
 ---
 
-# 🚀 Fonctionnalités
+## 🚀 Fonctionnalités
 
-## Gestion des clients
+### API FastAPI
 
-- Création d'un client
-- Consultation de la liste des clients
+- Gestion des clients
+- Gestion des commandes
+- Création automatique des tables via SQLAlchemy
+- Documentation interactive Swagger
 
-## Gestion des commandes
+### Client Desktop Tkinter
 
-- Création d'une commande
-- Consultation des commandes
+- Affichage des clients
+- Ajout de nouveaux clients
+- Communication avec l'API via HTTP Requests
 
 ---
 
-# 🏗️ Architecture du projet
+## 🏗️ Architecture du projet
 
 MagasinAPI/
 │
-├── app/
-│ ├── main.py # Point d'entrée FastAPI
-│ ├── database.py # Connexion SQLAlchemy
-│ ├── models.py # Modèles des tables
-│ ├── schemas.py # Validation Pydantic
-│ └── init.py
+├── app/ # Backend FastAPI
+│ ├── main.py # Routes API
+│ ├── models.py # Modèles SQLAlchemy
+│ ├── schemas.py # Schémas Pydantic
+│ ├── database.py # Connexion base de données
+│
+├── client/ # Application graphique
+│ ├── app.py # Interface Tkinter
+│ ├── api.py # Communication avec FastAPI
 │
 ├── requirements.txt
-├── .gitignore
+├── render.yaml # Configuration Render
 ├── README.md
-└── .env # Variables d'environnement (non versionné)
+└── .gitignore
+
 
 ---
 
-# 🛠️ Technologies utilisées
+## 🛠️ Technologies utilisées
 
-| Technologie | Utilisation |
-|---|---|
-| Python | Langage principal |
-| FastAPI | Framework API REST |
-| SQLAlchemy | ORM base de données |
-| MySQL/MariaDB | Base de données |
-| Pydantic | Validation des données |
-| Uvicorn | Serveur ASGI |
-| Git/GitHub | Versionnement |
+- Python 3
+- FastAPI
+- SQLAlchemy
+- MySQL
+- FreeDB
+- Tkinter
+- Requests
+- Git / GitHub
+- Render
 
 ---
 
-# ⚙️ Installation locale
+## ⚙️ Installation locale
 
-## 1. Cloner le projet
+Cloner le projet :
 
 ```bash
 git clone https://github.com/nadabh98/MagasinAPI.git

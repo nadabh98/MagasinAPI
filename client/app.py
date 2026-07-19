@@ -1,186 +1,138 @@
+# Import de la bibliothèque tkinter pour créer l'interface graphique
 import tkinter as tk
-from tkinter import ttk, messagebox
-
-from api import get_clients, ajouter_client
 
 
+# Import des deux fenêtres de gestion
+# FenetreClients : interface pour gérer les clients
+# FenetreCommandes : interface pour gérer les commandes
+from client.clients import FenetreClients
+from client.commandes import FenetreCommandes
+
+
+
+# Création de la fenêtre principale de l'application
+# tk.Tk représente la fenêtre principale d'un programme Tkinter
 class ApplicationMagasin(tk.Tk):
 
+
+    # Constructeur de la classe
+    # Cette fonction est exécutée automatiquement lors de la création de l'application
     def __init__(self):
+
+        # Appel du constructeur de la classe parent tk.Tk
+        # Permet d'initialiser correctement la fenêtre Tkinter
         super().__init__()
 
-        self.title("Gestion du Magasin - Client FastAPI")
-        self.geometry("800x500")
 
-        self.creer_formulaire()
-        self.creer_tableau()
-
-        #self.charger_clients()
+        # Définition du titre affiché en haut de la fenêtre
+        self.title("Magasin API - Gestion")
 
 
-    # -----------------------------
-    # Formulaire client
-    # -----------------------------
-
-    def creer_formulaire(self):
-
-        cadre = tk.Frame(self, padx=10, pady=10)
-        cadre.pack(fill="x")
+        # Définition de la taille de la fenêtre
+        # largeur x hauteur
+        self.geometry("400x300")
 
 
-        tk.Label(cadre, text="Nom :").grid(row=0, column=0)
-
-        self.champ_nom = tk.Entry(cadre)
-        self.champ_nom.grid(row=0, column=1, padx=5)
-
-
-        tk.Label(cadre, text="Ville :").grid(row=0, column=2)
-
-        self.champ_ville = tk.Entry(cadre)
-        self.champ_ville.grid(row=0, column=3, padx=5)
-
-
-        bouton = tk.Button(
-            cadre,
-            text="Ajouter Client",
-            command=self.ajouter_client
-        )
-
-        bouton.grid(row=0, column=4, padx=10)
+        # Création de l'interface graphique
+        self.creer_interface()
 
 
 
-    # -----------------------------
-    # Tableau clients
-    # -----------------------------
-
-    def creer_tableau(self):
-
-        colonnes = (
-            "id_client",
-            "nom",
-            "ville"
-        )
+    # Fonction responsable de la création des éléments graphiques
+    # (labels, boutons...)
+    def creer_interface(self):
 
 
-        self.tableau = ttk.Treeview(
+        # Création d'un titre dans la fenêtre
+        titre = tk.Label(
             self,
-            columns=colonnes,
-            show="headings"
+            text="Gestion du magasin",
+            font=("Arial", 18)
         )
 
 
-        for colonne in colonnes:
-
-            self.tableau.heading(
-                colonne,
-                text=colonne
-            )
-
-            self.tableau.column(
-                colonne,
-                width=150
-            )
+        # Placement du titre dans la fenêtre
+        # pady ajoute un espace vertical autour du composant
+        titre.pack(pady=30)
 
 
-        self.tableau.pack(
-            fill="both",
-            expand=True,
-            padx=10,
-            pady=10
+
+        # Création du bouton permettant d'ouvrir la gestion des clients
+        bouton_clients = tk.Button(
+            self,
+
+            # Texte affiché sur le bouton
+            text="Gestion des clients",
+
+            # Largeur du bouton
+            width=25,
+
+            # Hauteur du bouton
+            height=2,
+
+            # Fonction appelée quand l'utilisateur clique sur le bouton
+            command=self.ouvrir_clients
         )
 
 
-
-    # -----------------------------
-    # Charger les clients depuis API
-    # -----------------------------
-
-    def charger_clients(self):
-
-        for ligne in self.tableau.get_children():
-            self.tableau.delete(ligne)
-
-
-        try:
-
-            clients = get_clients()
-
-
-            for client in clients:
-
-                self.tableau.insert(
-                    "",
-                    "end",
-                    values=(
-                        client["id_client"],
-                        client["nom"],
-                        client["ville"]
-                    )
-                )
-
-
-        except Exception as erreur:
-
-            messagebox.showerror(
-                "Erreur API",
-                str(erreur)
-            )
+        # Placement du bouton dans la fenêtre
+        bouton_clients.pack(pady=10)
 
 
 
-    # -----------------------------
-    # Ajouter un client
-    # -----------------------------
+        # Création du bouton permettant d'ouvrir la gestion des commandes
+        bouton_commandes = tk.Button(
+            self,
 
-    def ajouter_client(self):
+            # Texte affiché sur le bouton
+            text="Gestion des commandes",
 
-        nom = self.champ_nom.get()
-        ville = self.champ_ville.get()
+            width=25,
 
+            height=2,
 
-        if not nom:
-
-            messagebox.showwarning(
-                "Attention",
-                "Le nom est obligatoire"
-            )
-
-            return
+            # Appelle la fonction ouvrir_commandes au clic
+            command=self.ouvrir_commandes
+        )
 
 
-        try:
-
-            ajouter_client(
-                nom,
-                ville
-            )
-
-
-            messagebox.showinfo(
-                "Succès",
-                "Client ajouté"
-            )
-
-
-            self.charger_clients()
-
-
-            self.champ_nom.delete(0, tk.END)
-            self.champ_ville.delete(0, tk.END)
-
-
-        except Exception as erreur:
-
-            messagebox.showerror(
-                "Erreur",
-                str(erreur)
-            )
+        # Placement du bouton commandes
+        bouton_commandes.pack(pady=10)
 
 
 
+
+
+    # Fonction appelée lorsque l'utilisateur clique sur
+    # "Gestion des clients"
+    def ouvrir_clients(self):
+
+        # Création d'une nouvelle fenêtre client
+        # self représente la fenêtre principale comme parent
+        FenetreClients(self)
+
+
+
+
+    # Fonction appelée lorsque l'utilisateur clique sur
+    # "Gestion des commandes"
+    def ouvrir_commandes(self):
+
+        # Création d'une nouvelle fenêtre commandes
+        FenetreCommandes(self)
+
+
+
+
+# Cette condition vérifie que le fichier est exécuté directement
+# et non importé par un autre fichier
 if __name__ == "__main__":
 
+
+    # Création de l'application principale
     application = ApplicationMagasin()
 
+
+    # Lance la boucle principale Tkinter
+    # Elle garde la fenêtre ouverte et attend les actions utilisateur
     application.mainloop()

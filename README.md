@@ -64,29 +64,30 @@ L'application cliente permet :
 
 ## 🏗️ Architecture du projet
 
+## Project Structure
+
+```text
 MagasinAPI/
-
 │
-├── app/ # API FastAPI
+├── app/                         # API FastAPI
+│   │
+│   ├── main.py                  # Routes API
+│   ├── database.py              # Connexion base de données
+│   ├── models.py                # Modèles SQLAlchemy
+│   └── schemas.py               # Schémas Pydantic
 │
-│ ├── main.py # Routes API
-│ ├── database.py # Connexion base de données
-│ ├── models.py # Modèles SQLAlchemy
-│ └── schemas.py # Schémas Pydantic
+├── client/                      # Application Tkinter
+│   │
+│   ├── app.py                   # Menu principal
+│   ├── clients.py               # Interface clients
+│   ├── commandes.py             # Interface commandes
+│   └── api.py                   # Communication avec FastAPI
 │
-├── client/ # Application Tkinter
-│
-│ ├── app.py # Menu principal
-│ ├── clients.py # Interface clients
-│ ├── commandes.py # Interface commandes
-│ └── api.py # Communication avec FastAPI
-│
-├── requirements.txt
-├── render.yaml
-├── README.md
-└── .gitignore
-
----
+├── requirements.txt             # Dépendances Python
+├── render.yaml                  # Configuration déploiement Render
+├── README.md                    # Documentation du projet
+└── .gitignore                   # Fichiers ignorés par Git
+```
 
 ## 🛠️ Technologies utilisées
 

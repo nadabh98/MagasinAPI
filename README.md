@@ -1,4 +1,4 @@
-# 🏪 MagasinAP# 🏪 MagasinAPI
+# 🏪 MagasinAP
 
 Projet complet de gestion d'un magasin développé avec **Python**, comprenant :
 

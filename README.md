@@ -17,21 +17,25 @@ Créer une application permettant de gérer :
 - les commandes associées aux clients
 
 L'application utilise une architecture client / serveur :
-
 Utilisateur
-|
-↓
-Interface graphique Tkinter
-|
-↓ HTTP Requests
-|
-API FastAPI
-|
-↓ SQLAlchemy
-|
-Base MySQL FreeDB
 
----
+    |
+    |
+    ↓
+
+Interface graphique Tkinter
+
+    |
+    |
+    ↓  HTTP Requests
+
+API FastAPI
+
+    |
+    |
+    ↓  SQLAlchemy
+
+Base de données MySQL FreeDB
 
 ## 🚀 Fonctionnalités
 
